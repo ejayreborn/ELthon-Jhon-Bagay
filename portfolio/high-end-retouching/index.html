@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>High-End Retouching — Portfolio</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .ba-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+    .ba{position:relative;overflow:hidden;border-radius:16px;box-shadow:var(--shadow);background:#000}
+    .ba img{display:block;width:100%;height:auto}
+    .ba .after{position:absolute;inset:0;opacity:0;transition:opacity .5s ease}
+    .ba:hover .after{opacity:1}
+    .page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+    .tap-hint{color:var(--muted);font-size:.95rem}
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="../../index.html#portfolio" class="btn-outline">← Back</a>
+      <div style="font-weight:800;">High-End Retouching</div>
+      <div></div>
+    </div>
+  </header>
+
+  <main class="container section">
+    <div class="page-header">
+      <h1 class="section-title" style="margin:0">Hover to Reveal “After”</h1>
+      <span class="tap-hint">Tip: Tap images on mobile to toggle</span>
+    </div>
+    <div class="ba-grid">
+      <!-- Item 1 -->
+      <figure class="ba" data-tap-toggle>
+        <img src="../../images/retouch-before-1.jpg" alt="Before 1" loading="lazy" width="1600" height="1067">
+        <img src="../../images/retouch-after-1.jpg" alt="After 1" class="after" loading="lazy" width="1600" height="1067">
+      </figure>
+      <!-- Item 2 -->
+      <figure class="ba" data-tap-toggle>
+        <img src="../../images/retouch-before-2.jpg" alt="Before 2" loading="lazy" width="1600" height="1067">
+        <img src="../../images/retouch-after-2.jpg" alt="After 2" class="after" loading="lazy" width="1600" height="1067">
+      </figure>
+      <!-- Duplicate placeholders for more works -->
+      <figure class="ba" data-tap-toggle>
+        <img src="../../images/retouch-before-1.jpg" alt="Before" loading="lazy" width="1600" height="1067">
+        <img src="../../images/retouch-after-1.jpg" alt="After" class="after" loading="lazy" width="1600" height="1067">
+      </figure>
+      <figure class="ba" data-tap-toggle>
+        <img src="../../images/retouch-before-2.jpg" alt="Before" loading="lazy" width="1600" height="1067">
+        <img src="../../images/retouch-after-2.jpg" alt="After" class="after" loading="lazy" width="1600" height="1067">
+      </figure>
+    </div>
+  </main>
+
+  <script>
+    // Tap-to-toggle for mobile
+    document.querySelectorAll('[data-tap-toggle]').forEach(card => {
+      card.addEventListener('click', () => {
+        const after = card.querySelector('.after');
+        after.style.opacity = after.style.opacity === '1' ? '0' : '1';
+      });
+    });
+  </script>
+</body>
+</html>

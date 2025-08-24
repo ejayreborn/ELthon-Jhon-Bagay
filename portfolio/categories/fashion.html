@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fashion — Portfolio</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .magazine{display:grid;gap:28px}
+    .spread{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;align-items:start}
+    .spread img{width:100%;height:auto;border-radius:16px;box-shadow:var(--shadow)}
+    .caption{color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="../../index.html#portfolio" class="btn-outline">← Back</a>
+      <div style="font-weight:800;">Fashion</div>
+      <div></div>
+    </div>
+  </header>
+
+  <main class="container section">
+    <h1 class="section-title" style="margin-bottom:8px">Fashion</h1>
+    <p class="about-text" style="margin-bottom:28px">Magazine-style layout. Replace placeholders with your finished spreads.</p>
+
+    <div class="magazine">
+      <section class="spread">
+        <img src="../../images/mag-fashion.jpg" alt="Fashion spread A" loading="lazy" width="1400" height="900">
+        <img src="../../images/mag-fashion.jpg" alt="Fashion spread B" loading="lazy" width="1400" height="900">
+      </section>
+      <p class="caption">Caption: Brief notes about objectives, retouching steps, or layout decisions.</p>
+
+      <section class="spread">
+        <img src="../../images/mag-fashion.jpg" alt="Fashion spread C" loading="lazy" width="1400" height="900">
+        <img src="../../images/mag-fashion.jpg" alt="Fashion spread D" loading="lazy" width="1400" height="900">
+      </section>
+    </div>
+  </main>
+</body>
+</html>

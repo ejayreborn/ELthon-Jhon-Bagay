@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejay Reborn — Portfolio</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="stylesheet" href="css/style.css" />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
+    ></script>
+    <script defer src="js/script.js"></script>
+    <meta
+      name="description"
+      content="Clean, smooth, and fast portfolio of Ejay Reborn — Graphic Artist & Photo Retoucher."
+    />
+  </head>
+  <body>
+    <!-- Sticky Navbar -->
+    <header class="navbar">
+      <div class="nav-inner">
+        <a href="#" class="logo" aria-label="Homepage">
+          <img
+            src="images/logo.svg"
+            alt="Ejay Logo"
+            width="120"
+            height="40"
+            style="vertical-align: middle"
+          />
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#hero">Home</a>
+          <a href="#services">Services</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button class="nav-toggle" aria-label="Open Menu" aria-expanded="false">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section id="hero" class="hero container">
+      <div class="hero-text">
+        <p class="kicker">Hello, I’m</p>
+        <h1>Elthon Jhon Bagay</h1>
+        <h2>Graphic Designer & Photo Retoucher</h2>
+        <p class="subheading">
+          I craft clean, high-end visuals, polished retouching, precise product
+          edits, and tasteful motion.
+        </p>
+        <div class="cta">
+          <a href="#contact" class="btn">Contact Me</a>
+          <a href="Ejay-CV.pdf" class="btn-outline" download>Download CV</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <img
+          src="images/your-photo.png"
+          alt="Portrait of Ejay"
+          loading="eager"
+          width="800"
+          height="800"
+        />
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="section container">
+      <h2 class="section-title">Services</h2>
+      <div class="grid cards-4">
+        <article class="card">
+          <h3>High-End Retouching</h3>
+          <p>Skin, fashion, editorial—clean, natural, magazine-ready.</p>
+        </article>
+        <article class="card">
+          <h3>Product Editing</h3>
+          <p>Color-true, dust-free, consistent sets for e‑commerce.</p>
+        </article>
+        <article class="card">
+          <h3>Brand & Social Graphics</h3>
+          <p>Campaign tiles, thumbnails, and feed-ready layouts.</p>
+        </article>
+        <article class="card">
+          <h3>Creative Manipulation</h3>
+          <p>Composite, cleanup, and tasteful visual treatments.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Portfolio Menu (Magazine Style) -->
+    <section id="portfolio" class="section container">
+      <h2 class="section-title">Portfolio</h2>
+      <div class="mag-grid">
+        <a class="mag-card" href="portfolio/high-end-retouching/index.html">
+          <img
+            src="images/mag-fashion.jpg"
+            alt="High-end retouching cover"
+            loading="lazy"
+            width="1400"
+            height="900"
+          />
+          <div class="mag-overlay">
+            <h3>High-End Retouching</h3>
+            <p>Before → After (hover reveal)</p>
+          </div>
+        </a>
+        <a class="mag-card" href="portfolio/categories/food-menu.html">
+          <img
+            src="images/mag-food.jpg"
+            alt="Food menu portfolio"
+            loading="lazy"
+            width="1400"
+            height="900"
+          />
+          <div class="mag-overlay">
+            <h3>Food Menu</h3>
+            <p>Menus, layouts, appetizing edits</p>
+          </div>
+        </a>
+        <a class="mag-card" href="portfolio/categories/product.html">
+          <img
+            src="images/mag-product.jpg"
+            alt="Product portfolio"
+            loading="lazy"
+            width="1400"
+            height="900"
+          />
+          <div class="mag-overlay">
+            <h3>Product</h3>
+            <p>Clean product sets & catalogs</p>
+          </div>
+        </a>
+        <a class="mag-card" href="logo/index.html">
+          <img
+            src="images/logo-thumb-1.jpg"
+            alt="Logo portfolio"
+            loading="lazy"
+            width="1000"
+            height="700"
+          />
+          <div class="mag-overlay">
+            <h3>Logo & Branding</h3>
+            <p>Marks, mockups, case studies</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section container">
+      <h2 class="section-title">About Me</h2>
+      <p class="about-text">
+        I’m a photo editor and graphic artist focused on high-end retouching and
+        clean visuals. I love precise selections, consistent color, and subtle
+        polish that lets the product shine.
+      </p>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section container">
+      <h2 class="section-title">Contact</h2>
+      <form
+        class="contact-form"
+        action="mailto:ejayreborn.21@gmail.com"
+        method="POST"
+        enctype="text/plain"
+      >
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <select name="collab" required>
+          <option value="" disabled selected>
+            What do you want to collaborate on?
+          </option>
+          <option>High-End Retouching</option>
+          <option>Product Editing</option>
+          <option>Logo / Branding</option>
+          <option>Social Media Graphics</option>
+          <option>Other</option>
+        </select>
+        <textarea
+          name="message"
+          rows="6"
+          placeholder="Your message"
+          required
+        ></textarea>
+        <button type="submit" class="btn">Send</button>
+      </form>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <p>© <span id="year"></span> Ejay Reborn. All rights reserved.</p>
+        <a href="#hero" class="back-to-top">Back to top ↑</a>
+      </div>
+    </footer>
+  </body>
+</html>
