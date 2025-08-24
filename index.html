@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ejay Reborn — Portfolio</title>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
     <script
       defer
@@ -55,8 +61,9 @@
         <h1>Elthon Jhon Bagay</h1>
         <h2>Graphic Designer & Photo Retoucher</h2>
         <p class="subheading">
-          I craft clean, high-end visuals, polished retouching, precise product
-          edits, and tasteful motion.
+          I turn ideas into visuals and pixels into polished stories. From
+          layouts that speak volumes to retouching that feels invisible, my work
+          lives where creativity meets precision.
         </p>
         <div class="cta">
           <a href="#contact" class="btn">Contact Me</a>
@@ -68,9 +75,37 @@
           src="images/your-photo.png"
           alt="Portrait of Ejay"
           loading="eager"
-          width="800"
-          height="800"
+          height="600"
         />
+      </div>
+    </section>
+
+    <!-- Brands -->
+    <section id="brands" class="section container">
+      <h2 class="section-title">Brands I’ve Worked With</h2>
+      <p style="color: var(--muted); max-width: 70ch">
+        Six brands that trusted me with their stories—each project sharpened my
+        craft and expanded my creative perspective.
+      </p>
+      <div class="grid bento-grid brands-grid" style="align-items: center">
+        <div class="brand-tile">
+          <img src="images/brand-1.svg" alt="Brand 1" width="120" height="40" />
+        </div>
+        <div class="brand-tile">
+          <img src="images/brand-2.svg" alt="Brand 2" width="120" height="40" />
+        </div>
+        <div class="brand-tile">
+          <img src="images/brand-3.svg" alt="Brand 3" width="100" height="40" />
+        </div>
+        <div class="brand-tile">
+          <img src="images/brand-4.svg" alt="Brand 4" width="140" height="40" />
+        </div>
+        <div class="brand-tile">
+          <img src="images/brand-5.svg" alt="Brand 5" width="160" height="28" />
+        </div>
+        <div class="brand-tile">
+          <img src="images/brand-6.svg" alt="Brand 6" width="80" height="32" />
+        </div>
       </div>
     </section>
 
@@ -78,7 +113,7 @@
     <section id="services" class="section container">
       <h2 class="section-title">Services</h2>
       <div class="grid cards-4">
-        <article class="card">
+        <article class="card bento-grid">
           <h3>High-End Retouching</h3>
           <p>Skin, fashion, editorial—clean, natural, magazine-ready.</p>
         </article>
@@ -101,56 +136,60 @@
     <section id="portfolio" class="section container">
       <h2 class="section-title">Portfolio</h2>
       <div class="mag-grid">
-        <a class="mag-card" href="portfolio/high-end-retouching/index.html">
+        <a class="mag-card bento-grid" href="portfolio/photo-retouching.html">
           <img
             src="images/mag-fashion.jpg"
-            alt="High-end retouching cover"
+            alt="Photo retouching"
             loading="lazy"
             width="1400"
             height="900"
           />
           <div class="mag-overlay">
-            <h3>High-End Retouching</h3>
-            <p>Before → After (hover reveal)</p>
+            <h3>Photo Retouching</h3>
+            <p>High-end skin beauty, cosmetics, jewelry, and cleanup.</p>
           </div>
         </a>
-        <a class="mag-card" href="portfolio/categories/food-menu.html">
-          <img
-            src="images/mag-food.jpg"
-            alt="Food menu portfolio"
-            loading="lazy"
-            width="1400"
-            height="900"
-          />
-          <div class="mag-overlay">
-            <h3>Food Menu</h3>
-            <p>Menus, layouts, appetizing edits</p>
-          </div>
-        </a>
-        <a class="mag-card" href="portfolio/categories/product.html">
+        <a class="mag-card" href="portfolio/layout-design.html">
           <img
             src="images/mag-product.jpg"
-            alt="Product portfolio"
+            alt="Layout design"
             loading="lazy"
             width="1400"
             height="900"
           />
           <div class="mag-overlay">
-            <h3>Product</h3>
-            <p>Clean product sets & catalogs</p>
+            <h3>Layout Design</h3>
+            <p>
+              Digital print ads and campaign layouts with precise typography.
+            </p>
           </div>
         </a>
-        <a class="mag-card" href="logo/index.html">
+        <a class="mag-card" href="portfolio/product-listing.html">
           <img
-            src="images/logo-thumb-1.jpg"
-            alt="Logo portfolio"
+            src="images/logo-thumb-2.jpg"
+            alt="Product listing"
             loading="lazy"
-            width="1000"
-            height="700"
+            width="1400"
+            height="900"
           />
           <div class="mag-overlay">
-            <h3>Logo & Branding</h3>
-            <p>Marks, mockups, case studies</p>
+            <h3>Product Listing</h3>
+            <p>
+              E‑commerce ready: background changes, shadow recreation, masking.
+            </p>
+          </div>
+        </a>
+        <a class="mag-card" href="portfolio/background-change.html">
+          <img
+            src="images/mag-food.jpg"
+            alt="Background change"
+            loading="lazy"
+            width="1400"
+            height="900"
+          />
+          <div class="mag-overlay">
+            <h3>Background Change</h3>
+            <p>Fashion, editorial and e‑commerce background replacements.</p>
           </div>
         </a>
       </div>
@@ -160,15 +199,69 @@
     <section id="about" class="section container">
       <h2 class="section-title">About Me</h2>
       <p class="about-text">
-        I’m a photo editor and graphic artist focused on high-end retouching and
-        clean visuals. I love precise selections, consistent color, and subtle
-        polish that lets the product shine.
+        I didn’t start as a designer—I started as someone who loved fixing the
+        small details others overlooked. Over time, that eye for detail grew
+        into a passion for creating designs that not only look good but feel
+        intentional. Today, I craft visuals that tell stories, elevate brands,
+        and connect with people.
       </p>
+    </section>
+
+    <!-- Fun Facts -->
+    <section id="fun-facts" class="section container">
+      <h2 class="section-title">Fun Facts</h2>
+      <div class="grid cards-4">
+        <article class="card bento-grid">
+          <h3>☕ Coffee First</h3>
+          <p>
+            My best ideas come with a hot cup of coffee—black, no compromise.
+          </p>
+        </article>
+        <article class="card">
+          <h3>🎧 Workflow Beats</h3>
+          <p>
+            I retouch faster when the music’s on repeat; tempo keeps the eye
+            moving.
+          </p>
+        </article>
+        <article class="card">
+          <h3>🎮 Off-Duty</h3>
+          <p>
+            When I’m not designing, I’m leveling up in Roblox or exploring new
+            games.
+          </p>
+        </article>
+        <article class="card">
+          <h3>✨ Design Philosophy</h3>
+          <p>
+            I believe design should feel simple, even when the process is
+            complex.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Tools -->
+    <section id="tools" class="section container">
+      <h2 class="section-title">Tools I Use</h2>
+      <p style="color: var(--muted); max-width: 70ch; margin: 0 auto 18px">
+        Where creativity meets workflow.
+      </p>
+      <div class="grid cards-4">
+        <article class="card"><h3>Adobe Photoshop</h3></article>
+        <article class="card"><h3>Adobe Illustrator</h3></article>
+        <article class="card"><h3>Figma</h3></article>
+        <article class="card"><h3>Microsoft Office</h3></article>
+      </div>
     </section>
 
     <!-- Contact -->
     <section id="contact" class="section container">
       <h2 class="section-title">Contact</h2>
+      <p style="color: var(--muted); max-width: 60ch; margin: 0 auto 18px">
+        Let’s create something together. Send your project idea and I’ll get
+        back to you.
+      </p>
       <form
         class="contact-form"
         action="mailto:ejayreborn.21@gmail.com"
@@ -199,7 +292,10 @@
 
     <footer class="footer">
       <div class="container footer-inner">
-        <p>© <span id="year"></span> Ejay Reborn. All rights reserved.</p>
+        <p>
+          © <span id="year"></span> Elton John Bagay — Crafted with passion,
+          pixels, and coffee.
+        </p>
         <a href="#hero" class="back-to-top">Back to top ↑</a>
       </div>
     </footer>

@@ -1,10 +1,44 @@
 :root {
-  --bg: #ffffff;
-  --text: #1a1a1a;
+  /* Colors */
+  --bg: #fbfbfd; /* smooth white */
+  --bento-bg: #e7e8eb; /* light gray for bento tiles */
+  --text: #1c1c1e;
   --muted: #6b7280;
-  --accent: #1e90ff;
-  --card: #f7f7f7;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  --accent: #007aff; /* iOS-style blue */
+  --card: #ffffff;
+
+  /* Spacing (crisp, generous rhythm) */
+  --space-xxl: 96px; /* very large section spacing */
+  --space-xl: 56px;
+  --space-lg: 36px;
+  --space-md: 24px;
+  --space-sm: 14px;
+
+  /* Typography scale */
+  --fs-base: 16px; /* body */
+  --leading-base: 1.6;
+  --fs-sm: 14px;
+  --fs-md: 16px;
+  --fs-lg: 18px;
+  --fs-xl: 20px;
+  --fs-xxl: 28px;
+
+  /* Radii */
+  --radius-desktop: 18px;
+  --radius-tablet: 14px;
+  --radius-mobile: 12px;
+
+  /* Shadows (soft, 5-15% opacity range) */
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --shadow-subtle: 0 6px 18px rgba(0, 0, 0, 0.06);
+  /* Section background alternation */
+  --section-bg-1: #fbfbfd; /* super light */
+  --section-bg-2: #f4f5f8; /* light */
+}
+
+/* Active radius alias (overridden at breakpoints) */
+:root {
+  --radius: var(--radius-desktop);
 }
 
 * {
@@ -19,17 +53,89 @@ html {
   scroll-behavior: smooth;
 }
 body {
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial,
-    sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: var(--fs-base);
+  line-height: var(--leading-base);
 }
 
 /* Container */
 .container {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 var(--space-md);
+}
+
+/* Bento grid foundation used by sections */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+/* apply bento tile styles within bento grid contexts */
+.bento-grid .card,
+.bento-grid .mag-card {
+  background: var(--bento-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-subtle);
+}
+
+/* Brand tile style */
+.brand-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  background: var(--bento-bg);
+  border-radius: var(--radius);
+  box-shadow: none;
+}
+
+/* Specific grid for the Brands section: 3 columns x 2 rows on desktop */
+.brands-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+/* Hero bento tiles */
+.hero .hero-text,
+.hero .hero-media {
+  background: transparent;
+  border-radius: var(--radius);
+  padding: var(--space-lg);
+  box-shadow: none;
+}
+
+/* Ensure hero image itself has no background or box-shadow */
+.hero .hero-media img {
+  background: transparent;
+  box-shadow: none;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* default card / mag-card tune-ups */
+.card {
+  background: var(--card);
+  padding: 22px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-subtle);
+}
+.mag-card {
+  position: relative;
+  display: block;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-subtle);
+  background: #000;
 }
 
 /* Sticky Navbar */
@@ -45,8 +151,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 14px 20px;
+  gap: var(--space-sm);
+  padding: calc(var(--space-sm) + 8px) var(--space-md);
 }
 .logo {
   font-weight: 800;
@@ -68,58 +174,75 @@ body {
 }
 .nav-toggle {
   position: relative;
-  width: 38px;
-  height: 38px;
-  display: flex;
+  width: 44px;
+  height: 44px;
+  display: none; /* hidden on desktop, shown on mobile via media query */
   align-items: center;
   justify-content: center;
-  background: none;
+  background: transparent;
   border: none;
   cursor: pointer;
   z-index: 1100;
   padding: 0;
+  border-radius: var(--radius);
 }
 
-/* Hero */
 .hero {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
-  gap: 40px;
+  gap: var(--space-xxl);
   align-items: center;
   min-height: 80vh;
-  padding: 60px 0;
+  padding: var(--space-xxl) 0;
 }
 .kicker {
   color: var(--muted);
   font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-bottom: calc(var(--space-sm) + 4px);
 }
-h1 {
-  font-size: clamp(2.2rem, 5vw, 3.6rem);
-  line-height: 1.1;
-  margin: 0.2em 0;
-}
-h2 {
-  font-size: clamp(1.2rem, 2.8vw, 1.8rem);
+.lead {
+  /* helper for subheadings */
+  font-size: var(--fs-lg);
   color: var(--muted);
-  margin: 0.2em 0 0.6em;
+  margin-bottom: var(--space-md);
+}
+
+h1 {
+  font-size: clamp(2.6rem, 6vw, 4rem);
+  line-height: 1.02;
+  margin: 0 0 calc(var(--space-sm));
+  font-weight: 800;
+}
+
+h2 {
+  font-size: clamp(1.25rem, 2.6vw, 1.8rem);
+  color: var(--muted);
+  margin: 0 0 calc(var(--space-md) / 2);
+  font-weight: 700;
+  line-height: 1.25;
 }
 .subheading {
   color: #374151;
-  max-width: 52ch;
+  max-width: 58ch;
+  font-size: var(--fs-lg);
+  line-height: 1.6;
 }
 .cta {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   margin-top: 18px;
 }
 .btn,
 .btn-outline {
   display: inline-block;
-  padding: 12px 18px;
-  border-radius: 10px;
+  padding: 12px 22px;
+  border-radius: var(--radius);
   text-decoration: none;
   font-weight: 700;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-subtle);
+  font-size: var(--fs-md);
+  letter-spacing: 0.01em;
 }
 .btn {
   background: var(--accent);
@@ -139,27 +262,55 @@ h2 {
 
 /* Sections */
 .section {
-  padding: 80px 0;
+  /* larger vertical rhythm between sections with horizontal gutters */
+  padding: var(--space-xxl) var(--space-md);
+}
+
+/* Alternate section background colors for subtle stripes */
+.section:nth-of-type(odd) {
+  background: var(--section-bg-1);
+}
+.section:nth-of-type(even) {
+  background: var(--section-bg-2);
+}
+
+/* Navbar hide/show transition */
+.navbar {
+  transition: transform 280ms ease-in-out, opacity 220ms ease-in-out;
+  will-change: transform, opacity;
+}
+.navbar.nav-hidden {
+  transform: translateY(-110%);
+  opacity: 0;
+  pointer-events: none;
 }
 .section-title {
-  font-size: clamp(1.6rem, 3vw, 2rem);
-  text-align: center;
-  margin: 0 0 26px;
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  text-align: left;
+  margin: 0 0 calc(var(--space-md));
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+/* Make section paragraphs left aligned by default and remove default margins so spacing is controlled by section padding */
+.section p {
+  text-align: left;
+  margin: 0;
 }
 
 /* Cards */
 .grid {
   display: grid;
-  gap: 18px;
+  gap: var(--space-lg);
 }
 .cards-4 {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 .card {
   background: var(--card);
-  padding: 22px;
+  padding: 28px;
   border-radius: 16px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-subtle);
 }
 .card h3 {
   margin: 0 0 8px;
@@ -168,8 +319,8 @@ h2 {
 /* Magazine Grid */
 .mag-grid {
   display: grid;
-  gap: 18px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: calc(var(--space-md));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 .mag-card {
   position: relative;
@@ -185,7 +336,7 @@ h2 {
   height: auto;
   aspect-ratio: 16/10;
   object-fit: cover;
-  opacity: 0.92;
+  opacity: 0.96;
   transition: transform 0.5s ease, opacity 0.5s ease;
 }
 .mag-card .mag-overlay {
@@ -207,8 +358,10 @@ h2 {
 .about-text {
   max-width: 70ch;
   margin: 0 auto;
-  text-align: center;
+  text-align: left;
   color: #374151;
+  font-size: var(--fs-md);
+  line-height: 1.7;
 }
 
 /* Contact */
@@ -254,22 +407,77 @@ h2 {
   .hero {
     grid-template-columns: 1fr;
   }
+  :root {
+    --radius: var(--radius-tablet);
+    --space-lg: 20px;
+  }
   .nav-toggle {
     display: block;
   }
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 64px;
-    left: 0;
-    right: 0;
-    background: #fff;
-    border-bottom: 1px solid #eee;
-    padding: 12px 20px;
-    flex-direction: column;
+
+  /* Brands grid becomes 2 columns on tablet */
+  .brands-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
   }
-  .nav-links.open {
-    display: flex;
+}
+
+/* Apple-style spacing for mobile view */
+@media (max-width: 860px) {
+  body {
+    padding: 0 16px;
+  }
+  .container {
+    padding: 0 8px;
+    margin: 0 auto;
+  }
+  .section {
+    padding: 48px 0;
+  }
+  .grid,
+  .cards-4,
+  .mag-grid {
+    gap: 24px;
+  }
+  .card,
+  .mag-card {
+    margin-bottom: 16px;
+    border-radius: 20px;
+    padding: 24px;
+  }
+  .about-text,
+  .contact-form {
+    margin-bottom: 24px;
+  }
+  .footer-inner {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 0;
+  }
+}
+
+/* Mobile-specific rules */
+@media (max-width: 520px) {
+  :root {
+    --radius: var(--radius-mobile);
+    --space-lg: 16px;
+    --space-md: 14px;
+  }
+  .bento-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--space-md);
+  }
+  /* Brands grid 2 columns on small screens */
+  .brands-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .mag-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  .container {
+    padding: 0 var(--space-md);
   }
 }
 
@@ -302,4 +510,31 @@ h2 {
 .nav-toggle.is-open .icon-bar:nth-child(3) {
   top: 17px;
   transform: rotate(-45deg);
+}
+
+/* Show nav links on desktop */
+.nav-links {
+  display: flex;
+  gap: 18px;
+}
+
+/* Hide nav links and show hamburger on tablet/mobile */
+@media (max-width: 860px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    padding: 12px 20px;
+    flex-direction: column;
+  }
+  .nav-links.open {
+    display: flex;
+  }
+  .nav-toggle {
+    display: block;
+  }
 }
