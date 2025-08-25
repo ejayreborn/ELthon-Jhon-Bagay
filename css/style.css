@@ -418,6 +418,34 @@ h2 {
   line-height: 1.7;
 }
 
+/* about section visual tweaks moved from inline styles */
+.about-tagline {
+  font-weight: 700;
+  color: var(--accent);
+  margin-top: 8px;
+  margin-bottom: 12px;
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+}
+
+/* nicer list spacing inside about section */
+.about-list {
+  margin: 10px 0 18px 0;
+  padding-left: 1.15em;
+  max-width: 70ch;
+  color: var(--text);
+}
+.about-list li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+/* ensure about-text still left aligned and no paragraph margins */
+.about-text {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
 /* Responsive: stack on smaller screens */
 @media (max-width: 860px) {
   .about-grid {

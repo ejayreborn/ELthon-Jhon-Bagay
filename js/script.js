@@ -188,61 +188,82 @@ window.addEventListener("DOMContentLoaded", () => {
       const altSrc = heroImg.dataset.altSrc;
       if (!altSrc) return;
 
-      // store default so we can switch back
-      heroImg.dataset.defaultSrc = defaultSrc;
+      // preload helper (returns a promise)
+      const preload = (src) =>
+        new Promise((resolve) => {
+          if (!src) return resolve();
+          const img = new Image();
+          img.onload = () => resolve(img);
+          img.onerror = () => resolve(img); // resolve even on error to keep loop stable
+          img.src = src;
+        });
 
-      // preload alt image
-      const pre = new Image();
-      pre.src = altSrc;
+      // small async sleep
+      const wait = (s) => new Promise((r) => setTimeout(r, s * 1000));
 
-      // respect reduced motion
-      const reduce = window.matchMedia(
+      // respect reduced-motion
+      const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
       ).matches;
-      if (reduce) {
+      if (reduceMotion) {
+        heroImg.src = defaultSrc;
         heroImg.style.opacity = "1";
         heroImg.style.filter = "none";
         return;
       }
 
-      // entrance animation: slide up from bottom
-      gsap.fromTo(
-        heroImg,
-        { y: 100, opacity: 0, filter: "blur(6px)" },
-        {
-          y: 0,
-          opacity: 1,
-          filter: "blur(0px)",
-          duration: 0.5,
-          ease: "power2.out",
-        }
-      );
+      // start state
+      heroImg.src = defaultSrc;
+      heroImg.style.opacity = "1";
+      heroImg.style.filter = "none";
 
-      let showingAlt = false;
-      const hold = 5; // seconds to show each image
-      const fade = 0.8;
+      // preload both images, then run loop without eval or string timers
+      Promise.all([preload(defaultSrc), preload(altSrc)]).then(() => {
+        (async function loop() {
+          let showingAlt = false;
+          const hold = 5; // seconds each image stays visible
+          const fade = 0.8; // fade duration
 
-      // timeline using a single <img> element (no absolute positioning)
-      const tl = gsap.timeline({ repeat: -1, repeatDelay: 0 });
-      tl.to({}, { duration: hold }) // initial hold of default image
-        .to(heroImg, {
-          duration: fade,
-          opacity: 0,
-          filter: "blur(6px)",
-          ease: "power2.in",
-          onComplete: () => {
-            // swap source while hidden
+          // entrance animation (from bottom)
+          await gsap.fromTo(
+            heroImg,
+            { y: 100, opacity: 0, filter: "blur(6px)" },
+            {
+              y: 0,
+              opacity: 1,
+              filter: "blur(0px)",
+              duration: 0.6,
+              ease: "power2.out",
+            }
+          );
+
+          while (true) {
+            await wait(hold);
+
+            // fade out + blur
+            await gsap.to(heroImg, {
+              opacity: 0,
+              filter: "blur(6px)",
+              duration: fade,
+              ease: "power2.in",
+            });
+
+            // swap src (preloaded)
+            const nextSrc = showingAlt ? defaultSrc : altSrc;
+            await preload(nextSrc);
+            heroImg.src = nextSrc;
             showingAlt = !showingAlt;
-            heroImg.src = showingAlt ? altSrc : heroImg.dataset.defaultSrc;
-          },
-        })
-        .to(heroImg, {
-          duration: fade,
-          opacity: 1,
-          filter: "blur(0px)",
-          ease: "power2.out",
-        })
-        .to({}, { duration: hold }); // hold on new image and loop
+
+            // fade in
+            await gsap.to(heroImg, {
+              opacity: 1,
+              filter: "blur(0px)",
+              duration: fade,
+              ease: "power2.out",
+            });
+          }
+        })();
+      });
     })();
   }
 });
