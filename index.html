@@ -66,13 +66,15 @@
           lives where creativity meets precision.
         </p>
         <div class="cta">
-          <a href="#contact" class="btn">Contact Me</a>
+          <a href="#portfolio" class="btn">Explore My Work</a>
           <a href="Ejay-CV.pdf" class="btn-outline" download>Download CV</a>
         </div>
       </div>
       <div class="hero-media">
         <img
+          id="hero-photo"
           src="images/your-photo.png"
+          data-alt-src="images/alt-your-photo.png"
           alt="Portrait of Ejay"
           loading="eager"
           height="600"
@@ -80,59 +82,31 @@
       </div>
     </section>
 
-    <!-- Brands -->
-    <section id="brands" class="section container">
-      <h2 class="section-title">Brands I’ve Worked With</h2>
-      <p style="color: var(--muted); max-width: 70ch">
-        Six brands that trusted me with their stories—each project sharpened my
-        craft and expanded my creative perspective.
-      </p>
-      <div class="grid bento-grid brands-grid" style="align-items: center">
-        <div class="brand-tile">
-          <img src="images/brand-1.svg" alt="Brand 1" width="120" height="40" />
+    <!-- Stats (below hero, above portfolio) -->
+    <section id="stats" class="section container">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" data-target="9" data-format="plain">0</div>
+          <div class="stat-label">Years of Experience</div>
         </div>
-        <div class="brand-tile">
-          <img src="images/brand-2.svg" alt="Brand 2" width="120" height="40" />
+        <div class="stat-card">
+          <div class="stat-number" data-target="100" data-format="plain">0</div>
+          <div class="stat-label">Projects Completed</div>
         </div>
-        <div class="brand-tile">
-          <img src="images/brand-3.svg" alt="Brand 3" width="100" height="40" />
+        <div class="stat-card">
+          <div class="stat-number" data-target="10000" data-format="short">
+            0
+          </div>
+          <div class="stat-label">Images Retouched</div>
         </div>
-        <div class="brand-tile">
-          <img src="images/brand-4.svg" alt="Brand 4" width="140" height="40" />
-        </div>
-        <div class="brand-tile">
-          <img src="images/brand-5.svg" alt="Brand 5" width="160" height="28" />
-        </div>
-        <div class="brand-tile">
-          <img src="images/brand-6.svg" alt="Brand 6" width="80" height="32" />
+        <div class="stat-card">
+          <div class="stat-number" data-target="6" data-format="plain">0</div>
+          <div class="stat-label">Brands Collaborated</div>
         </div>
       </div>
     </section>
 
-    <!-- Services -->
-    <section id="services" class="section container">
-      <h2 class="section-title">Services</h2>
-      <div class="grid cards-4">
-        <article class="card bento-grid">
-          <h3>High-End Retouching</h3>
-          <p>Skin, fashion, editorial—clean, natural, magazine-ready.</p>
-        </article>
-        <article class="card">
-          <h3>Product Editing</h3>
-          <p>Color-true, dust-free, consistent sets for e‑commerce.</p>
-        </article>
-        <article class="card">
-          <h3>Brand & Social Graphics</h3>
-          <p>Campaign tiles, thumbnails, and feed-ready layouts.</p>
-        </article>
-        <article class="card">
-          <h3>Creative Manipulation</h3>
-          <p>Composite, cleanup, and tasteful visual treatments.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- Portfolio Menu (Magazine Style) -->
+    <!-- Portfolio (moved directly after stats) -->
     <section id="portfolio" class="section container">
       <h2 class="section-title">Portfolio</h2>
       <div class="mag-grid">
@@ -195,16 +169,125 @@
       </div>
     </section>
 
-    <!-- About -->
-    <section id="about" class="section container">
-      <h2 class="section-title">About Me</h2>
-      <p class="about-text">
-        I didn’t start as a designer—I started as someone who loved fixing the
-        small details others overlooked. Over time, that eye for detail grew
-        into a passion for creating designs that not only look good but feel
-        intentional. Today, I craft visuals that tell stories, elevate brands,
-        and connect with people.
+    <!-- Brands -->
+    <section id="brands" class="section container">
+      <h2 class="section-title">Brands I’ve Worked With</h2>
+      <p style="color: var(--muted); max-width: 70ch">
+        Six brands that trusted me with their stories—each project sharpened my
+        craft and expanded my creative perspective.
       </p>
+      <div class="grid bento-grid brands-grid" style="align-items: center">
+        <div class="brand-tile">
+          <img src="images/brand-1.svg" alt="Brand 1" width="120" height="40" />
+        </div>
+        <div class="brand-tile">
+          <img src="images/brand-2.svg" alt="Brand 2" width="120" height="40" />
+        </div>
+        <div class="brand-tile">
+          <img src="images/brand-3.svg" alt="Brand 3" width="100" height="40" />
+        </div>
+        <div class="brand-tile">
+          <img src="images/brand-4.svg" alt="Brand 4" width="140" height="40" />
+        </div>
+        <div class="brand-tile">
+          <img src="images/brand-5.svg" alt="Brand 5" width="160" height="28" />
+        </div>
+        <div class="brand-tile">
+          <img src="images/brand-6.svg" alt="Brand 6" width="80" height="32" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="section container">
+      <h2 class="section-title">Services</h2>
+      <div class="grid cards-4">
+        <article class="card bento-grid">
+          <h3>High-End Retouching</h3>
+          <p>Skin, fashion, editorial—clean, natural, magazine-ready.</p>
+        </article>
+        <article class="card">
+          <h3>Product Editing</h3>
+          <p>Color-true, dust-free, consistent sets for e‑commerce.</p>
+        </article>
+        <article class="card">
+          <h3>Brand & Social Graphics</h3>
+          <p>Campaign tiles, thumbnails, and feed-ready layouts.</p>
+        </article>
+        <article class="card">
+          <h3>Creative Manipulation</h3>
+          <p>Composite, cleanup, and tasteful visual treatments.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- About (updated copy) -->
+    <section id="about" class="section container">
+      <h2 class="section-title">About EJ Luxura</h2>
+
+      <div class="about-grid">
+        <div class="about-media">
+          <img
+            src="images/About Me Photo.jpg"
+            alt="Elthon Jhon Bagay — EJ Luxura"
+            width="720"
+            height="720"
+          />
+        </div>
+
+        <div class="about-body">
+          <p class="about-text">
+            EJ Luxura is more than a name - it’s a philosophy.
+          </p>
+
+          <p class="about-text">
+            The word Luxura draws from the Latin root <strong>lux</strong>,
+            meaning “light.” Light is the foundation of both photography and
+            design, and it symbolizes clarity, beauty, and refinement. Paired
+            with my initials, EJ Luxura represents my commitment to bringing out
+            the finest details in every project — whether it’s enhancing the
+            natural glow of skin in high-end retouching or creating compelling
+            designs that illuminate a brand’s identity.
+          </p>
+
+          <p
+            class="about-text lead"
+            style="font-weight: 700; color: var(--accent)"
+          >
+            Luxury in Every Pixel
+          </p>
+
+          <h3>Who I Am</h3>
+          <p class="about-text">
+            I’m Elthon Jhon Bagay, a graphic designer and professional photo
+            retoucher. My expertise spans high-end skin retouching, cosmetics,
+            and fashion models for e-commerce, alongside product design for
+            advertising materials such as flyers, menus, and logos.
+          </p>
+
+          <h3>My Approach</h3>
+          <p class="about-text">At EJ Luxura, I combine:</p>
+          <ul class="about-text" style="margin-top: 8px">
+            <li>
+              <strong>Attention to Detail</strong> → delivering flawless skin
+              retouching that looks natural yet polished.
+            </li>
+            <li>
+              <strong>Creative Design Thinking</strong> → producing designs that
+              balance beauty and function.
+            </li>
+            <li>
+              <strong>Luxury Standards</strong> → ensuring every piece feels
+              elevated, timeless, and impactful.
+            </li>
+          </ul>
+
+          <p class="about-text">
+            This is what makes EJ Luxura not just a brand, but a personal
+            signature — a reflection of both who I am and what I create.
+          </p>
+        </div>
+      </div>
     </section>
 
     <!-- Fun Facts -->

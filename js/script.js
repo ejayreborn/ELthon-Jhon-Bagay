@@ -11,13 +11,13 @@ if (navToggle && navLinks) {
         gsap.fromTo(
           navLinks,
           { y: -40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.45, ease: "power2.out" }
+          { y: 0, opacity: 1, duration: 0.3, ease: "power2.out" }
         );
       } else {
         gsap.to(navLinks, {
           y: -40,
           opacity: 0,
-          duration: 0.35,
+          duration: 0.3,
           ease: "power2.in",
         });
       }
@@ -33,6 +33,7 @@ window.addEventListener("DOMContentLoaded", () => {
   if (window.gsap) {
     gsap.registerPlugin(ScrollTrigger);
 
+    // --- existing GSAP animations (kept) ---
     // subtle blur -> sharp for key text when entering the viewport (reversible)
     gsap.utils
       .toArray(".kicker, .subheading, .section-title")
@@ -44,7 +45,7 @@ window.addEventListener("DOMContentLoaded", () => {
             opacity: 1,
             y: 0,
             filter: "blur(0px)",
-            duration: 0.8,
+            duration: 0.4,
             ease: "power2.out",
             scrollTrigger: {
               trigger: el,
@@ -60,7 +61,7 @@ window.addEventListener("DOMContentLoaded", () => {
     gsap.from(".cta a, .cta .btn", {
       y: 10,
       opacity: 0,
-      duration: 0.6,
+      duration: 0.4,
       ease: "power2.out",
       stagger: 0.08,
       scrollTrigger: {
@@ -75,7 +76,7 @@ window.addEventListener("DOMContentLoaded", () => {
       y: 18,
       opacity: 0,
       filter: "blur(6px)",
-      duration: 0.7,
+      duration: 0.4,
       ease: "power2.out",
       stagger: 0.08,
       scrollTrigger: {
@@ -89,7 +90,7 @@ window.addEventListener("DOMContentLoaded", () => {
     gsap.from("#services .card", {
       y: 20,
       opacity: 0,
-      duration: 0.75,
+      duration: 0.4,
       ease: "power2.out",
       stagger: 0.08,
       scrollTrigger: {
@@ -103,7 +104,7 @@ window.addEventListener("DOMContentLoaded", () => {
     gsap.from(".mag-grid .mag-card", {
       y: 24,
       opacity: 0,
-      duration: 0.8,
+      duration: 0.4,
       ease: "power2.out",
       stagger: 0.12,
       scrollTrigger: {
@@ -117,7 +118,7 @@ window.addEventListener("DOMContentLoaded", () => {
     gsap.from("#fun-facts .card", {
       y: 20,
       opacity: 0,
-      duration: 0.72,
+      duration: 0.4,
       ease: "power2.out",
       stagger: 0.08,
       scrollTrigger: {
@@ -131,7 +132,7 @@ window.addEventListener("DOMContentLoaded", () => {
     gsap.from("#tools .card", {
       y: 20,
       opacity: 0,
-      duration: 0.72,
+      duration: 0.4,
       ease: "power2.out",
       stagger: 0.08,
       scrollTrigger: {
@@ -140,6 +141,109 @@ window.addEventListener("DOMContentLoaded", () => {
         toggleActions: "play reverse play reverse",
       },
     });
+
+    // Stats - smooth number counts (staggered, reversible)
+    const formatCount = (value, format) => {
+      const v = Math.floor(value);
+      if (format === "short") {
+        if (v >= 1000) return `${Math.round(v / 1000)}K+`;
+        return `${v}+`;
+      }
+      return `${v}+`;
+    };
+
+    gsap.utils.toArray(".stat-number").forEach((el, i) => {
+      const target = Number(el.dataset.target) || 0;
+      const format = el.dataset.format || "plain";
+      const obj = { value: 0 };
+      gsap.to(obj, {
+        value: target,
+        duration: 6,
+        ease: "power1.out",
+        delay: i * 0.06,
+        stagger: 0.02,
+        scrollTrigger: {
+          trigger: "#stats",
+          start: "top 90%",
+          toggleActions: "play reverse play reverse",
+        },
+        onUpdate: function () {
+          el.textContent = formatCount(obj.value, format);
+        },
+        onComplete: function () {
+          if (format === "short" && target >= 1000) {
+            el.textContent = `${Math.round(target / 1000)}K+`;
+          } else {
+            el.textContent = `${target}+`;
+          }
+        },
+      });
+    });
+
+    // --- Hero image alternate crossfade loop (replacement) ---
+    (function heroImageCycle() {
+      const heroImg = document.getElementById("hero-photo");
+      if (!heroImg) return;
+      const defaultSrc = heroImg.getAttribute("src");
+      const altSrc = heroImg.dataset.altSrc;
+      if (!altSrc) return;
+
+      // store default so we can switch back
+      heroImg.dataset.defaultSrc = defaultSrc;
+
+      // preload alt image
+      const pre = new Image();
+      pre.src = altSrc;
+
+      // respect reduced motion
+      const reduce = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+      if (reduce) {
+        heroImg.style.opacity = "1";
+        heroImg.style.filter = "none";
+        return;
+      }
+
+      // entrance animation: slide up from bottom
+      gsap.fromTo(
+        heroImg,
+        { y: 100, opacity: 0, filter: "blur(6px)" },
+        {
+          y: 0,
+          opacity: 1,
+          filter: "blur(0px)",
+          duration: 0.5,
+          ease: "power2.out",
+        }
+      );
+
+      let showingAlt = false;
+      const hold = 5; // seconds to show each image
+      const fade = 0.8;
+
+      // timeline using a single <img> element (no absolute positioning)
+      const tl = gsap.timeline({ repeat: -1, repeatDelay: 0 });
+      tl.to({}, { duration: hold }) // initial hold of default image
+        .to(heroImg, {
+          duration: fade,
+          opacity: 0,
+          filter: "blur(6px)",
+          ease: "power2.in",
+          onComplete: () => {
+            // swap source while hidden
+            showingAlt = !showingAlt;
+            heroImg.src = showingAlt ? altSrc : heroImg.dataset.defaultSrc;
+          },
+        })
+        .to(heroImg, {
+          duration: fade,
+          opacity: 1,
+          filter: "blur(0px)",
+          ease: "power2.out",
+        })
+        .to({}, { duration: hold }); // hold on new image and loop
+    })();
   }
 });
 

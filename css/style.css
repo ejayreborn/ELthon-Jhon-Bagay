@@ -4,7 +4,7 @@
   --bento-bg: #e7e8eb; /* light gray for bento tiles */
   --text: #1c1c1e;
   --muted: #6b7280;
-  --accent: #007aff; /* iOS-style blue */
+  --accent: #e68a19; /* updated accent color */
   --card: #ffffff;
 
   /* Spacing (crisp, generous rhythm) */
@@ -113,13 +113,34 @@ body {
   box-shadow: none;
 }
 
-/* Ensure hero image itself has no background or box-shadow */
+/* Ensure hero media image uses natural flow and keeps original aspect (no absolute) */
+.hero .hero-media {
+  position: relative; /* keep for layout but images remain in flow */
+  overflow: hidden;
+  min-height: 320px;
+}
+
 .hero .hero-media img {
-  background: transparent;
-  box-shadow: none;
   display: block;
   width: 100%;
-  height: auto;
+  height: auto; /* preserve aspect ratio and avoid cropping */
+  max-width: 100%;
+  transition: opacity 0.9s ease, filter 0.9s ease, transform 0.9s ease;
+  opacity: 1;
+  filter: none;
+  object-fit: unset; /* avoid cover cropping */
+}
+
+/* remove/override any previous absolute rules for hero-base / hero-alt */
+.hero .hero-media img.hero-base,
+.hero .hero-media img.hero-alt {
+  position: static !important;
+  inset: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  z-index: auto !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 /* default card / mag-card tune-ups */
@@ -159,18 +180,25 @@ body {
   letter-spacing: 0.08em;
   color: var(--text);
   text-decoration: none;
+  background: #c1cbdb1c;
+  padding: 6px 12px;
+  border-radius: var(--radius);
 }
 .nav-links {
   display: flex;
-  gap: 18px;
+  gap: var(--space-md); /* increased horizontal gap between nav items */
+  align-items: center;
 }
 .nav-links a {
   color: var(--text);
   text-decoration: none;
   font-weight: 600;
+  padding: 8px 10px; /* added tap/click padding */
+  border-radius: 8px;
 }
 .nav-links a:hover {
   color: var(--accent);
+  background: rgba(31, 32, 42, 0.04);
 }
 .nav-toggle {
   position: relative;
@@ -262,8 +290,8 @@ h2 {
 
 /* Sections */
 .section {
-  /* larger vertical rhythm between sections with horizontal gutters */
-  padding: var(--space-xxl) var(--space-md);
+  /* reduced vertical rhythm and larger left/right padding */
+  padding: 48px var(--space-lg); /* stronger left/right gutters, reduced vertical */
 }
 
 /* Alternate section background colors for subtle stripes */
@@ -296,6 +324,7 @@ h2 {
 .section p {
   text-align: left;
   margin: 0;
+  padding: 0;
 }
 
 /* Cards */
@@ -355,13 +384,57 @@ h2 {
 }
 
 /* About */
+.about-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: var(--space-lg);
+  align-items: start;
+  align-content: start;
+  margin-top: calc(var(--space-md) / 2);
+}
+
+/* media frame */
+.about-media img {
+  width: 100%;
+  height: 100%;
+  max-height: 520px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  display: block;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* keep about text full-width within the body column and left aligned */
+.about-body {
+  min-width: 0; /* allow text to wrap correctly */
+}
 .about-text {
   max-width: 70ch;
-  margin: 0 auto;
+  margin: 0; /* removed auto-centering */
   text-align: left;
   color: #374151;
   font-size: var(--fs-md);
   line-height: 1.7;
+}
+
+/* Responsive: stack on smaller screens */
+@media (max-width: 860px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  .about-media {
+    order: 0;
+    width: 100%;
+  }
+  .about-media img {
+    max-height: 420px;
+    border-radius: var(--radius);
+  }
+  .about-body {
+    order: 1;
+  }
 }
 
 /* Contact */
@@ -481,6 +554,58 @@ h2 {
   }
 }
 
+/* Stats grid (small bento tiles) */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+  align-items: center;
+}
+.stat-card {
+  background: var(--bento-bg);
+  border-radius: var(--radius);
+  padding: calc(var(--space-md) + 6px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* left align per request */
+  justify-content: center;
+}
+.stat-number {
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-label {
+  color: var(--muted);
+  font-weight: 700;
+  font-size: var(--fs-md);
+}
+
+/* Responsive: stats become 2 columns on tablet/mobile */
+@media (max-width: 860px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+  :root {
+    --radius: var(--radius-tablet);
+    --space-lg: 20px;
+  }
+}
+
+@media (max-width: 520px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  :root {
+    --radius: var(--radius-mobile);
+    --space-lg: 16px;
+    --space-md: 14px;
+  }
+}
 .icon-bar {
   position: absolute;
   left: 8px;
